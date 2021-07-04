@@ -1,0 +1,7 @@
+xrdb ~/.Xresources
+xwallpaper --stretch ~/.wallpaper
+wal -R
+
+
+exec i3
+

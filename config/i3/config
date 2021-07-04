@@ -1,0 +1,243 @@
+# --- общие настройки --- #
+
+    set $mod Mod4
+
+    # выбор терминала
+    set $terminal xterm
+
+    # выбор лаунчера
+    set $launcher rofi -show drun
+
+    # ты можешь использовать кнопочку $mod+ЛКМ чтобы перемещать окно
+    # или $mod+ПКМ чтобы изменять его размер
+    floating_modifier $mod
+
+    # раскладка для клавиатуры и её переключение на win + space
+    # здесь выбраны только us и ru
+    exec_always setxkbmap -layout us,ru -option grp:win_space_toggle
+
+    default_border pixel 1
+
+
+# --- настройки внешнего вида --- #
+
+    # здесь ты можешь выбрать любой шрифт и изменить его размер
+    # только нужно чтобы эти шрифты были установлены и ещё нужно знать их название
+    font pango:monospace 8
+
+    # значок для управления сетями на панельке
+    exec nm-applet
+
+    # значок для уравления флешками на панельке
+    exec udiskie --no-automount --no-notify --tray
+
+    # прозрачность
+    exec_always xcompmgr
+
+    # пространства между окнами
+    gaps inner 14
+    gaps outer 0
+
+    # полибар
+    #exec_always pkill polybar; polybar example
+
+    # настройки цветов
+    set_from_resource $c0 i3wm.color0 #1e1e1e
+    set_from_resource $c1 i3wm.color1 #cf6a4c
+    set_from_resource $c2 i3wm.color2 #8f9d6a
+    set_from_resource $c3 i3wm.color3 #f9ee98
+    set_from_resource $c4 i3wm.color4 #7587a6
+    set_from_resource $c5 i3wm.color5 #9b859d
+    set_from_resource $c6 i3wm.color6 #afc4db
+    set_from_resource $c7 i3wm.color7 #a7a7a7
+
+    ## class                border  bg      text        ind.        child_border
+    client.focused          $c7     $c7     $c0         $c1         $c7
+    client.focused_inactive $c0     $c0     $c7         $c0         $c0
+    client.unfocused        $c0     $c0     $c7         $c0         $c0
+    client.placeholder      $c0     $c0     $c7         $c1         $c0
+    client.urgent           $c1     $c1     $c0         $c1         $c1
+    client.background       $c0
+
+
+# --- панелька --- #
+
+    bar {
+        # здесь можно выбрать, что будет выводиться в панельке
+        status_command i3blocks
+        separator_symbol " "
+
+        # изменить положение панельки
+        # top - сверху
+        # bottom - снизу
+        position top
+
+        # цвета панелки
+        colors {
+            background  $c0
+            statusline  $c7
+            separator   $c7
+
+            # class             border      bg          text
+            focused_workspace   $c0         $c2         $c0
+            inactive_workspace  $c0         $c0         $c7
+            active_workspace    $c0         $c2         $c0
+            urgent_workspace    $c0         $c1         $c0
+            binding_mode        $c0         $c1         $c0
+        }
+    }
+
+# --- команды при запуске программ --- #
+
+    # инструкция: для многих программ полезно выполнить какую-нибудь команду
+    # сразу же при их запуске
+    # например, чтобы сделать прозрачность, нужно выполнить команду transset при запуске
+
+    # прозрачность для телеграма
+    for_window [class="TelegramDesktop"] exec transset -a 0.9
+
+    # прозрачность для терминала xterm
+    for_window [class="XTerm"] exec transset -a 0.8
+
+    # прозрачность для firefox
+    for_window [class="Firefox-esr"] exec transset -a 0.9
+
+    # плавающий стим
+    for_window [class="Steam"] floating enable
+
+# --- настройки горячих клавиш --- #
+
+    # инструкция: чтобы создать горячую клавишу, нужно просто написать
+    # bindsym <комбинация клавиш> <команда>
+
+    # запустить телеграм
+    bindsym $mod+t exec telegram-desktop
+
+    # запустить мой любимый браузер
+    bindsym $mod+b exec firefox
+
+    bindsym $mod+g exec $terminal -e ranger
+    # запустить терминал с рейнджером
+
+    # запустить терминал с калькулятором
+    bindsym $mod+c exec $terminal -e qalc
+
+    # открыть терминал
+    bindsym $mod+Return exec $terminal
+
+    # открыть терминал с tmux
+    bindsym $mod+Shift+Return exec $terminal -e tmux new-session -A -s default
+
+    # убить (закрыть) выбранное окно
+    bindsym $mod+w kill
+
+    # открыть программу для запуска приложений
+    bindsym $mod+p exec $launcher
+
+    # открыть менюшку для копирования особых символов
+    bindsym $mod+u exec dmenuunicode -nb "#000000" -nf "#cc4444" -sb "#cc4444" -sf "#000000" -fn "monospace:size=8"
+
+    # использовать стрелочки чтобы перемещаться между окнами
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # использовать стрелочки чтобы перемещать окна
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+    # размещать новое окно справа от выбранного
+    bindsym $mod+h split h
+
+    # размещать новое окно снизу от выбранного
+    bindsym $mod+v split v
+
+    # сделать выбранное окно на полный экран
+    bindsym $mod+m fullscreen toggle
+
+    # сделать окно плавающим (как у нормальных людей)
+    bindsym $mod+Shift+f floating toggle
+
+    # переключаться между плавающими окнами и обычными
+    bindsym $mod+f focus mode_toggle
+
+    # типы размещения окон на экране
+    #bindsym $mod+s layout stacking
+    #bindsym $mod+t layout tabbed
+    #bindsym $mod+n layout toggle split
+
+    # здесь ты можешь выбрать название для каждого виртуального рабочего стола
+    set $ws1 " 1 ʕっ•ᴥ•ʔっ "
+    set $ws2 " 2 ʕっ•ᴥ•ʔっ "
+    set $ws3 " 3 ʕっ•ᴥ•ʔっ "
+    set $ws4 " 4 ʕっ•ᴥ•ʔっ "
+    set $ws5 " 5 ʕっ•ᴥ•ʔっ "
+    set $ws6 " 6 ʕっ•ᴥ•ʔっ "
+    set $ws7 " 7 ʕっ•ᴥ•ʔっ "
+    set $ws8 " 8 ʕっ•ᴥ•ʔっ "
+    set $ws9 " 9 ʕっ•ᴥ•ʔっ "
+
+    # переключение между виртуальными рабочими столами
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
+    bindsym $mod+7 workspace $ws7
+    bindsym $mod+8 workspace $ws8
+    bindsym $mod+9 workspace $ws9
+
+    # перемещение окон между виртуальными рабочими столами
+    bindsym $mod+Shift+1 move container to workspace $ws1
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
+    bindsym $mod+Shift+7 move container to workspace $ws7
+    bindsym $mod+Shift+8 move container to workspace $ws8
+    bindsym $mod+Shift+9 move container to workspace $ws9
+
+    # перезапустить i3, чтобы применить настроечки из этого конфига
+    bindsym $mod+Shift+r restart
+
+    # выйти из i3
+    bindsym $mod+Shift+q exit
+
+    # кнопочки для изменения громкости
+    bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse sset Master 5%+; pkill -SIGRTMIN+10 i3blocks # increase sound volume
+    bindsym XF86AudioLowerVolume exec "amixer -q -D pulse sset Master 5%-; pkill -SIGRTMIN+10 i3blocks # decrease sound volume
+    bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle; pkill -SIGRTMIN+10 i3blocks # mute sound
+
+    # кнопочки для изменения яркости
+    bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+    bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+    # сделать скриншот
+    bindsym Print exec screen
+
+    bindsym $mod+r mode "resize"
+    mode "resize" {
+            bindsym Left resize shrink width 10 px or 10 ppt
+            bindsym Down resize grow height 10 px or 10 ppt
+            bindsym Up resize shrink height 10 px or 10 ppt
+            bindsym Right resize grow width 10 px or 10 ppt
+
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+            bindsym $mod+r mode "default"
+    }
+
+    bindsym $mod+e mode "session"
+    mode "session" {
+        bindsym q exec systemctl poweroff
+        bindsym w exec systemctl reboot
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+

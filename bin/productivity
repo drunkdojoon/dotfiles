@@ -1,0 +1,44 @@
+#! /bin/python3
+
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import datetime
+
+# здесь ты можешь изменить название файлика с продуктивностью!
+file_name = "todo/productivity"
+
+# style
+plt.style.use('dark_background')
+
+# init
+fig, ax = plt.subplots()
+ax.set_title('график для викусика')
+ax.set_xlabel('даты')
+ax.set_ylabel('продуктивность %')
+ax.set_ylim(0, 100)
+
+
+# data
+dates = []
+productivity = []
+
+f = open(file_name, "r")
+for l in f:
+    if not l.isspace():
+        d, p = l.split(' ')
+        dates += [d]
+        productivity += [int(p)]
+
+if dates == [] or productivity == []:
+    exit()
+
+x_values = [datetime.datetime.strptime(d,"%d.%m.%Y").date() for d in dates]
+y_values = productivity
+
+formatter = mdates.DateFormatter("%d.%m") # здесь ты можешь изменить формат даты!
+ax.xaxis.set_major_formatter(formatter)
+
+# plot
+ax.plot(x_values, y_values)
+plt.show()
+

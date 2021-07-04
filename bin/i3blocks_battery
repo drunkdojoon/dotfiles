@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ch="$(cat /sys/class/power_supply/BAT0/capacity)"
+st="$(cat /sys/class/power_supply/BAT0/status)"
+
+if [ $ch -lt 20 ]; then
+	echo " сharge me, baby :) $ch% "
+	echo
+	echo "#ff5555"
+else
+	echo " BAT $st $ch% "
+fi
+

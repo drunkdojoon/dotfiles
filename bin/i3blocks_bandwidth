@@ -1,0 +1,4 @@
+#/bin/bash
+bw="$(vnstat | grep -m1 today | awk '{print $8 , $9}')"
+echo " $bw "
+

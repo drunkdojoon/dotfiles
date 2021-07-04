@@ -1,0 +1,16 @@
+#!/bin/bash
+
+bio="2021-05-18"
+rus="2021-05-25"
+mat="2021-05-28"
+
+today="$(date +'%Y-%m-%d')"
+
+biodiff="$(dateutils.ddiff $today $bio -f '%dd')"
+rusdiff="$(dateutils.ddiff $today $rus -f '%dd')"
+matdiff="$(dateutils.ddiff $today $mat -f '%dd')"
+
+echo " BIO $biodiff   RUS $rusdiff   MATH $matdiff "
+echo
+echo "#ee8888"
+

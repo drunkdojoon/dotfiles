@@ -1,0 +1,12 @@
+#!/bin/bash
+file="$(cmus-remote -C status | grep file | grep -o '[^/]*$')"
+
+if [ -z "$file" ]
+then
+ echo " no music "
+else
+ echo " $file "
+fi
+
+
+

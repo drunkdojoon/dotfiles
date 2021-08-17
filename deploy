@@ -1,0 +1,21 @@
+#!/bin/bash
+
+mkdir -p ~/.config/
+
+rm ~/.bashrc
+rm ~/.bash_profile
+rm ~/.profile
+rm ~/.bash_logout
+rm ~/.xinitrc
+rm -r ~/.config/i3
+rm -r ~/.config/i3blocks
+rm -r ~/.config/sxiv
+
+cp -r config/i3 ~/.config/i3
+cp -r config/i3blocks ~/.config/i3blocks
+cp -r config/sxiv ~/.config/sxiv
+
+cp config/bashrc ~/.bashrc
+cp config/bash_profile ~/.bash_profile
+cp config/xinitrc ~/.xinitrc
+cp config/xresources ~/.Xresources

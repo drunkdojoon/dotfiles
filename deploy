@@ -19,3 +19,10 @@ cp config/bashrc ~/.bashrc
 cp config/bash_profile ~/.bash_profile
 cp config/xinitrc ~/.xinitrc
 cp config/xresources ~/.Xresources
+
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/share
+
+cp bin/* ~/.local/bin/
+cp -r share/* ~/.local/share/
+

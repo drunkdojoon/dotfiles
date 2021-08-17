@@ -10,7 +10,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #umask 022
 
 export TERMINAL=xterm
-export EDITOR=nvim
+export EDITOR=micro
 export IMAGE_VIEWER=sxiv
 export MEDIA_PLAYER=mpv
 

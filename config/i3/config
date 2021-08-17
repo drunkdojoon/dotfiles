@@ -35,8 +35,8 @@
     exec_always xcompmgr
 
     # пространства между окнами
-    gaps inner 14
-    gaps outer 0
+    #gaps inner 14
+    #gaps outer 0
 
     # полибар
     #exec_always pkill polybar; polybar example

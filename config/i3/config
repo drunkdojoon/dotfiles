@@ -3,7 +3,7 @@
     set $mod Mod4
 
     # выбор терминала
-    set $terminal xterm
+    set $terminal uxterm
 
     # выбор лаунчера
     set $launcher rofi -show drun

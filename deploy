@@ -10,7 +10,9 @@ rm ~/.xinitrc
 rm -r ~/.config/i3
 rm -r ~/.config/i3blocks
 rm -r ~/.config/sxiv
+rm -r ~/.config/ranger
 
+cp -r config/ranger ~/.config/ranger
 cp -r config/i3 ~/.config/i3
 cp -r config/i3blocks ~/.config/i3blocks
 cp -r config/sxiv ~/.config/sxiv

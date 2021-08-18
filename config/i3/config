@@ -116,8 +116,11 @@
     # запустить мой любимый браузер
     bindsym $mod+b exec firefox
 
-    bindsym $mod+g exec $terminal -e ranger
     # запустить терминал с рейнджером
+    bindsym $mod+g exec $terminal -e ranger
+
+    # запустить pcmanfm (графический файловый менеджер)
+    bindsym $mod+Shift+g exec pcmanfm
 
     # запустить терминал с калькулятором
     bindsym $mod+c exec $terminal -e qalc
@@ -163,6 +166,9 @@
 
     # переключаться между плавающими окнами и обычными
     bindsym $mod+f focus mode_toggle
+
+    # переключить прозрачность
+    bindsym $mod+Shift+t exec transset -at 0.85
 
     # типы размещения окон на экране
     #bindsym $mod+s layout stacking

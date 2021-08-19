@@ -14,6 +14,8 @@ do
         xwallpaper --stretch "$file"; cp "$file" ~/.wallpaper ;;
     "7")
         wal -i "$file" -n ;;
+    "p")
+        lp $file
     esac
 done
 
